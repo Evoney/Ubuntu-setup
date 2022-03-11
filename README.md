@@ -2,5 +2,7 @@
 Script in bash to setup my linux-ubuntu environment 
 
 
-# run
+# Run
+'''
 sh ./setup.sh
+'''
