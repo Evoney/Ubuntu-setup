@@ -1,19 +1,19 @@
 sudo apt-get update
 
-echo 'installing curl' 
+echo 'Installing curl' 
 sudo apt install curl -y
 
-echo 'installing git' 
+echo 'Installing git' 
 sudo apt install git -y
 
-echo 'installing snap' 
+echo 'Installing snap' 
 sudo apt install snapd
 
-echo "What name do you want to use in GIT user.name?"
+echo "What name do you want to use in GIT global user.name?"
 echo "For example, mine will be \"Evoney\""
 read git_config_user_name
 git config --global user.name "$git_config_user_name"
-clear 
+clear
 
 echo "What email do you want to use in GIT user.email?"
 echo "For example, mine will be \"evoney.tavares@gmail.com\""
@@ -22,7 +22,7 @@ git config --global user.email $git_config_user_email
 clear
 
 echo "Can I set VIM as your default GIT editor for you? (y/n)"
-echo "Always NOOOO, vim is bad"
+echo "Always NOOOO, vim nooo"
 read git_core_editor_to_vim
 if echo "$git_core_editor_to_vim" | grep -iq "^y" ;then
 	git config --global core.editor vim
@@ -38,23 +38,23 @@ cat ~/.ssh/id_rsa.pub | xclip -selection clipboard
 echo 'enabling workspaces for both screens' 
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 
-echo 'installing zsh'
+echo 'Installing zsh'
 sudo apt-get install zsh -y
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 chsh -s /bin/zsh
 
-echo 'installing tool to handle clipboard via CLI'
+echo 'Installing tool to handle clipboard via CLI'
 sudo apt-get install xclip -y
 
 export alias pbcopy='xclip -selection clipboard'
 export alias pbpaste='xclip -selection clipboard -o'
 source ~/.zshrc
 
-echo 'installing vim'
+echo 'Installing vim'
 sudo apt install vim -y
 clear
 
-echo 'installing vscode'
+echo 'Installing vscode'
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
@@ -62,7 +62,7 @@ sudo apt-get install apt-transport-https -y
 sudo apt-get update
 sudo apt-get install code -y # or code-insiders
 
-echo 'installing extensions'
+echo 'Installing extensions'
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension christian-kohler.path-intellisense
 code --install-extension dbaeumer.vscode-eslint
@@ -73,15 +73,15 @@ code --install-extension pmneo.tsimporter
 code --install-extension waderyan.gitblame
 code --install-extension yzhang.markdown-all-in-one
 
-echo 'installing spotify' 
+echo 'Installing spotify' 
 snap install spotify
 
-echo 'installing chrome' 
+echo 'Installing chrome' 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
-echo 'installing nvm' 
-sh -c "$(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash)"
+echo 'Installing nvm' 
+sh -c "$(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.40.3/install.sh | bash)"
 
 export NVM_DIR="$HOME/.nvm" && (
 git clone https://github.com/creationix/nvm.git "$NVM_DIR"
@@ -94,68 +94,12 @@ export NVM_DIR="$HOME/.nvm"
 
 source ~/.zshrc
 nvm --version
-nvm install 12
-nvm alias default 12
+nvm install 24
+nvm alias default 24
 node --version
 npm --version
 
-echo 'installing autosuggestions' 
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-source ~/.zshrc
-
-echo 'installing theme'
-sudo apt install fonts-firacode -y
-wget -O ~/.oh-my-zsh/themes/node.zsh-theme https://raw.githubusercontent.com/skuridin/oh-my-zsh-node-theme/master/node.zsh-theme 
-sed -i 's/.*ZSH_THEME=.*/ZSH_THEME="node"/g' ~/.zshrc
-
-echo 'adding dracula theme' 
-cat <<EOF >  ~/.config/terminator/config
-[global_config]
-  title_transmit_bg_color = "#ad7fa8"
-[keybindings]
-  close_term = <Primary>w
-  close_window = <Primary>q
-  new_tab = <Primary>t
-  new_window = <Primary>i
-  paste = <Primary>v
-  split_horiz = <Primary>e
-  split_vert = <Primary>d
-  switch_to_tab_1 = <Primary>1
-  switch_to_tab_10 = <Primary>0
-  switch_to_tab_2 = <Primary>2
-  switch_to_tab_3 = <Primary>3
-  switch_to_tab_4 = <Primary>4
-  switch_to_tab_5 = <Primary>5
-  switch_to_tab_6 = <Primary>6
-[layouts]
-  [[default]]
-    [[[child1]]]
-      parent = window0
-      type = Terminal
-    [[[window0]]]
-      parent = ""
-      type = Window
-[plugins]
-[profiles]
-  [[default]]
-    cursor_color = "#aaaaaa"
-EOF
-
-
-cat <<EOF >>  ~/.config/terminator/config
-[[Dracula]]
-    background_color = "#1e1f29"
-    background_darkness = 0.88
-    background_type = transparent
-    copy_on_selection = True
-    cursor_color = "#bbbbbb"
-    foreground_color = "#f8f8f2"
-    palette = "#000000:#ff5555:#50fa7b:#f1fa8c:#bd93f9:#ff79c6:#8be9fd:#bbbbbb:#555555:#ff5555:#50fa7b:#f1fa8c:#bd93f9:#ff79c6:#8be9fd:#ffffff"
-    scrollback_infinite = True
-EOF
-
-echo 'installing docker' 
+echo 'Installing docker' 
 sudo apt-get remove docker docker-engine docker.io
 sudo apt install docker.io -y
 sudo systemctl start docker
@@ -163,42 +107,55 @@ sudo systemctl enable docker
 docker --version
 
 chmod 777 /var/run/docker.sock
+sudo groupadd docker
+sudo usermod -aG docker $USER
 docker run hello-world
 
-echo 'installing docker-compose' 
+echo 'Installing docker-compose' 
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
-echo 'installing aws-cli' 
-sudo apt-get install awscli -y
+echo 'Installing aws-cli' 
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip -o awscliv2.zip
+sudo ./aws/install
+echo "AWS CLI installed! Version:"
 aws --version
 curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
 sudo dpkg -i session-manager-plugin.deb
 session-manager-plugin --version
 
-echo 'installing teamviewer'
+echo 'Installing teamviewer'
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 sudo apt install -y ./teamviewer_amd64.deb
 
-echo 'installing fzf'
+echo 'Installing fzf'
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
-echo 'installing brave'
-curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-source /etc/os-release
-echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/brave-browser-release-${UBUNTU_CODENAME}.list
-sudo apt update
-sudo apt install brave-keyring brave-browser
-
-echo 'installing dbeaver'
-wget -c https://dbeaver.io/files/6.0.0/dbeaver-ce_6.0.0_amd64.deb
-sudo dpkg -i dbeaver-ce_6.0.0_amd64.deb
+echo 'Installing dbeaver'
+wget -c https://dbeaver.io/files/25.3.2/dbeaver-ce_25.3.2_amd64.deb
+sudo dpkg -i dbeaver-ce_25.3.2_amd64.deb
 sudo apt-get install -f
 
-echo 'installing postman'
+echo 'Installing postman'
 sudo snap install postman
 
-echo 'installing nodejs'
-sudo snap install node --classic --channel=14
+echo "Installing kubectl"
+KUBECTL_LATEST=$(curl -L -s https://dl.k8s.io/release/stable.txt)
+curl -LO "https://dl.k8s.io/release/${KUBECTL_LATEST}/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+echo "kubectl installed! Version:"
+kubectl version --client
+
+echo "Installing K9s via webinstall.dev"
+curl -sS https://webinstall.dev/k9s | bash
+
+echo "Installing Terraform"
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
+
+echo "Setup Done!"
